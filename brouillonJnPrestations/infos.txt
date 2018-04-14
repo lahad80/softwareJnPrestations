@@ -1,0 +1,23 @@
+
+user:     lahad
+mdp:      *MboroNdiaye99
+
+nom BDD:  jnPrestations
+
+table1:   MonEntreprise
+table2:   Clients
+table3:   Residences
+table4:   Factures
+
+
+// pour se connecter à la base de données:
+
+
+- Démarrer:
+	dans Rechercher taper cmd
+
+- Dans console:
+	taper: mysql -h localhost -u lahad -p
+	puis entrer le mot de passe
+
+// chemin ficher = C:/Users/lahad/Desktop/programme_java/jnPrestations/brouillonJnPrestations/BDD.sql

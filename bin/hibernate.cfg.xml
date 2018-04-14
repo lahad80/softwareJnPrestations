@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+"hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!-- Assume jnPrestations is the database name -->
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/jnPrestations</property>
+		<property name="hibernate.connection.username">lahad</property>
+		<property name="hibernate.connection.password">*MboroNdiaye99</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>	
+		<property name="connection.pool_size">1</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="cahe.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hbm2ddl.auto">validate</property>		
+		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+				
+		<!-- List of XML mapping files -->
+		<mapping class ="com.jnPrestations.beans.EstateAgency"/>
+		<mapping class ="com.jnPrestations.beans.Invoice"/>
+		<mapping class ="com.jnPrestations.beans.MyBusiness"/>
+	    <mapping class ="com.jnPrestations.beans.Property"/> 
+	</session-factory>
+</hibernate-configuration>
