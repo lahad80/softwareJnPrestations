@@ -33,10 +33,10 @@ public class PropertyInputFrame extends TemplateFrame{
 
 	private JLabel titleLabel = new JLabel("Entrez les données de la résidence");
 	
-	private JLabel theEstateAgeLabel = new JLabel("Choisir le client");
+	private JLabel theEstateAgeLabel = new JLabel("Choisir le syndic");
 	private JComboBox<String> customersComboBox = new JComboBox();
 	
-	private JLabel addressLabel = new JLabel("Adresse");
+	private JLabel addressLabel = new JLabel("Adresse de la résidence");
 	private JTextField addressField = new JTextField();
 	private JLabel serviceLabel = new JLabel("Prestation");
 	private JTextField serviceField = new JTextField();

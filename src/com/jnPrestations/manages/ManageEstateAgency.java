@@ -6,13 +6,11 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import com.jnPrestations.beans.EstateAgency;
 import com.jnPrestations.beans.Property;
-import com.jnPrestations.connections.HibernateUtil;
+import com.jnPrestations.singletons.HibernateUtil;
 import com.jnPrestations.factories.FactoryClass;
 
 public class ManageEstateAgency {
@@ -20,18 +18,15 @@ public class ManageEstateAgency {
 	private FactoryClass fc = new FactoryClass();
 	private EstateAgency estateAg = (EstateAgency)fc.createClass("EstateAgency");
 
-	private static SessionFactory sf;
-
 	public ManageEstateAgency (){}
 
 	
 	public void add(String legalName, String address, String zipCode, String town, String phoneNumber,
 			String email, String siren){
 
-		sf = HibernateUtil.getSessionFactory();
-		Session s = sf.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
-			Transaction t = s.beginTransaction();
+			Transaction t = session.beginTransaction();
 			estateAg.setLegalName(legalName);
 			estateAg.setAddress(address);
 			estateAg.setZipCode(zipCode);
@@ -40,40 +35,36 @@ public class ManageEstateAgency {
 			estateAg.setEmail(email);
 			estateAg.setSiren(siren);
 
-			s.save(estateAg);
+			session.save(estateAg);
 			t.commit();
 		}catch (HibernateException he){
 
 		}finally{
-			s.close();
-			sf.close();
+			session.close();
 		}
 	}
 	public void delete(int id){
 
-		sf = HibernateUtil.getSessionFactory();
-		Session s = sf.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
-			Transaction t = s.beginTransaction();
+			Transaction t = session.beginTransaction();
 			
-			estateAg = (EstateAgency)s.get(EstateAgency.class, id);
-			s.delete(estateAg);
+			estateAg = (EstateAgency)session.get(EstateAgency.class, id);
+			session.delete(estateAg);
 			t.commit();
 		}catch (HibernateException he){
 
 		}finally{
-			s.close();
-			sf.close();
+			session.close();
 		}
 	}
 		public void update(int id, String legalName, String address, String zipCode, String town, String phoneNumber,
 				String email, String siren){
 
-			sf = HibernateUtil.getSessionFactory();
-			Session s = sf.openSession();
+			Session session = HibernateUtil.getSessionFactory().openSession();
 			try{
-				Transaction t = s.beginTransaction();
-				estateAg = (EstateAgency) s.get(EstateAgency.class, id);
+				Transaction t = session.beginTransaction();
+				estateAg = (EstateAgency) session.get(EstateAgency.class, id);
 				
 				estateAg.setLegalName(legalName);
 				estateAg.setAddress(address);
@@ -83,74 +74,65 @@ public class ManageEstateAgency {
 				estateAg.setEmail(email);
 				estateAg.setSiren(siren);
 
-				s.update(estateAg);
+				session.update(estateAg);
 				t.commit();
 			}catch (HibernateException he){
 
 			}finally{
-				s.close();
-				sf.close();
+				session.close();
 			}
 		}
 		
 		public EstateAgency find(int id){
-			Configuration conf = new Configuration();
-			sf = conf.configure().buildSessionFactory();
-			Session s = sf.openSession();
+			Session session = HibernateUtil.getSessionFactory().openSession();
 			Transaction t = null ;
 			try{
-				t = s.beginTransaction();
-				estateAg = (EstateAgency) s.get(EstateAgency.class, id);
+				t = session.beginTransaction();
+				estateAg = (EstateAgency) session.get(EstateAgency.class, id);
 				t.commit();
 			}catch(HibernateException he){
 
 			}
 			finally{	
-				s.close();
-				sf.close();
+				session.close();
 			}
 			return estateAg;
 		}	
 		
 		public List listAll(){
 			List<EstateAgency> list = new ArrayList<EstateAgency>();
-			Configuration conf = new Configuration();
-			sf = conf.configure().buildSessionFactory();
-			Session s = sf.openSession();
+			Session session = HibernateUtil.getSessionFactory().openSession();
 			Transaction t = null ;
 			String hql = "FROM EstateAgency ORDER BY legalName";
 			try{
-				t = s.beginTransaction();
-				Query query = s.createQuery(hql);
+				t = session.beginTransaction();
+				Query query = session.createQuery(hql);
 				list = query.list();
 				t.commit();
 			}catch(HibernateException he){
 
 			}
 			finally{	
-				s.close();
-				sf.close();
+				session.close();
 			}
 			return list;
 		}
 		
 		public List<Property> listHandledProperties(EstateAgency ea){
 			List<Property> list = new ArrayList<Property>();
-			Configuration conf = new Configuration();
-			sf = conf.configure().buildSessionFactory();
-			Session s = sf.openSession();
+
+			Session session = HibernateUtil.getSessionFactory().openSession();
 			Transaction t = null ;
 			try{
-				t = s.beginTransaction();
-				Query q = s.createQuery("FROM Property WHERE estateAgency = :ea");
+				t = session.beginTransaction();
+				Query q = session.createQuery("FROM Property WHERE estateAgency = :ea");
 				q.setParameter("ea", ea);
 				list = q.list();
 			}catch(HibernateException he){
 
 			}
 			finally{	
-				s.close();
-				sf.close();
+				session.close();
 			}
 			return list;
 		}

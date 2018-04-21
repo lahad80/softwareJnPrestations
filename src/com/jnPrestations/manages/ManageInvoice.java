@@ -6,18 +6,16 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import com.jnPrestations.beans.Invoice;
 import com.jnPrestations.beans.Property;
+import com.jnPrestations.singletons.HibernateUtil;
 import com.jnPrestations.factories.FactoryClass;
 
 
 public class ManageInvoice {
 	
-	private static SessionFactory sf;
 	private FactoryClass fc = new FactoryClass();
 	private Invoice invoice = (Invoice)fc.createClass("Invoice");
 
@@ -28,63 +26,58 @@ public class ManageInvoice {
 	
 
 	public void register(int invNumber, String dateOfIssue, String period, String status, Property property){
-		sf = new Configuration().configure().buildSessionFactory();
-		Session s = sf.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		
 		try{
-			Transaction t = s.beginTransaction();
+			Transaction t = session.beginTransaction();
 			invoice.setInvNumber(invNumber);
 			invoice.setDateOfIssue(dateOfIssue);
 			invoice.setPeriod(period);
 			invoice.setStatus(status);
 			invoice.setProperty(property);
 			
-			s.save(invoice);
+			session.save(invoice);
 			t.commit();
 		}
 		catch(HibernateException he){
 			
 		}
 		finally{
-			s.close();
-			sf.close();
+			session.close();
+			
 		}
 	}
 
 	public void brandAsSettled(int id){
-		sf = new Configuration().configure().buildSessionFactory();
-		Session s = sf.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t;
 		try{
-			t = s.beginTransaction();
-			invoice = (Invoice) s.get(Invoice.class, id);
+			t = session.beginTransaction();
+			invoice = (Invoice) session.get(Invoice.class, id);
 			invoice.setStatus("settled");
-			s.update(invoice);
+			session.update(invoice);
 			t.commit();
 		}catch(HibernateException he){
 			
 		}
 		finally{
-			s.close();
-			sf.close();
+			session.close();
 		}
 	}
 	
-	public List pickUnsettledOnes(){
+	public List<Invoice> pickUnsettledOnes(){
 		List <Invoice>list = new LinkedList<Invoice>();
-		sf = new Configuration().configure().buildSessionFactory();
-		Session s = sf.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = null;
 		try{
-			t = s.beginTransaction();
-			Query query = s.createQuery("FROM Invoice WHERE status =:unsettled");
+			t = session.beginTransaction();
+			Query query = session.createQuery("FROM Invoice WHERE status =:unsettled");
 			query.setParameter("unsettled", "unsettled");
 			list = query.list();
 		}catch(HibernateException he){
 			
 		}finally{
-			s.close();
-			sf.close();
+			session.close();
 		}
 		return list;
 	}
