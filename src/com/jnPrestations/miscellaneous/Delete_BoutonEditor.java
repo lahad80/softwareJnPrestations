@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
-import com.jnPrestations.factories.FactoryClass;
 import com.jnPrestations.manages.ManageInvoice;
 
 
@@ -23,7 +22,6 @@ public class Delete_BoutonEditor extends DefaultCellEditor {
 
 	protected JButton button;
 	private DeleteButtonListener bListener = new DeleteButtonListener();
-	private FactoryClass fc = new FactoryClass();
 
 
 	public Delete_BoutonEditor (JCheckBox checkBox) {
@@ -37,15 +35,14 @@ public class Delete_BoutonEditor extends DefaultCellEditor {
 	}
 
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) { 
-		//define le line number to our listener
+		//define line number to our listener
 		bListener.setRow(row);
-		//On passe aussi en paramètre le tableau pour des actions potentielles
-		//table as parameter pour potential actions
+		//table as parameter for potential actions
 		bListener.setTable(table);
 		//assign label to the button
 		button.setText( (value ==null) ? "" : value.toString() );
 		button.setBackground(Color.RED);
-		//return the butotn
+		//return the button
 		return button;
 	}
 
@@ -62,7 +59,7 @@ public class Delete_BoutonEditor extends DefaultCellEditor {
 
 			if(this.table.getModel().getValueAt(this.row, 0) != null){
 				int idToRemove = (int) this.table.getModel().getValueAt(this.row, 0);
-				ManageInvoice mi=  (ManageInvoice) fc.createClass("ManageInvoice");
+				ManageInvoice mi =  new ManageInvoice();
 				mi.brandAsSettled(idToRemove);
 
 				((MyTableModel)table.getModel()).removeRow(this.row);
@@ -70,5 +67,4 @@ public class Delete_BoutonEditor extends DefaultCellEditor {
 		}
 
 	} 
-
 }

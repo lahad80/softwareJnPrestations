@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,15 +16,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
-import com.jnPrestations.connections.HibernateUtil;
-import com.jnPrestations.factories.FactoryClass;
 import com.jnPrestations.main.Main;
 import com.jnPrestations.manages.ManageEstateAgency;
 import com.jnPrestations.manages.ManageMyBusiness;
@@ -60,9 +51,8 @@ public class InvoiceInputFrame extends TemplateFrame {
 	
 	private MyBusiness myBussiness;
 	private Property relevantProperty;
-	private FactoryClass fc = new FactoryClass();
-	private ManageEstateAgency mea = (ManageEstateAgency) fc.createClass("ManageEstateAgency");
-	private EstateAgency billedEstateAg = (EstateAgency) fc.createClass("EstateAgency");
+	private ManageEstateAgency mea = new ManageEstateAgency();
+	private EstateAgency billedEstateAg = new EstateAgency();
 
 	public InvoiceInputFrame(){
 		pan.setLayout(null);
@@ -161,9 +151,9 @@ public class InvoiceInputFrame extends TemplateFrame {
 			
 			// TODO Auto-generated method stub
 		
-			ManageMyBusiness mmb = (ManageMyBusiness) fc.createClass("ManageMyBusiness");
+			ManageMyBusiness mmb = new ManageMyBusiness();
 			myBussiness = mmb.find();
-			ManageProperty mr = (ManageProperty) fc.createClass("ManageProperty");
+			ManageProperty mr = new ManageProperty();
 			relevantProperty = mr.find((int) propertiesTable.getModel().getValueAt(propertiesTable.getSelectedRow(), 0));
 		 	Main.point = getLocation();
 			InvoiceViewingFrame ivf = new InvoiceViewingFrame(myBussiness, billedEstateAg, relevantProperty);

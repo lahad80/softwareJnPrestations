@@ -11,7 +11,6 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.jnPrestations.factories.FactoryClass;
 import com.jnPrestations.manages.ManageMyBusiness;
 import com.jnPrestations.beans.MyBusiness;
 
@@ -31,7 +30,6 @@ public class InformationsFrame extends TemplateFrame {
 	private JButton validateBtn = new JButton("Valider", new ImageIcon("images\\validateImg.png"));
 	private JButton modifyBtn = new JButton("Modifier", new ImageIcon("images\\modifyImg.png"));
 	
-	private FactoryClass fc = new FactoryClass();
 
 	
 	public InformationsFrame(){
@@ -141,7 +139,7 @@ public class InformationsFrame extends TemplateFrame {
 	}
 	// displays data from database
 	public void loadAndDisplay(){
-		ManageMyBusiness mmb = (ManageMyBusiness) fc.createClass("ManageMyBusiness");
+		ManageMyBusiness mmb = new ManageMyBusiness();
 		MyBusiness me =  mmb.find();
 		legalNameField.setText(me.getLegalName());
 		addressField.setText(me.getAddress());
@@ -160,7 +158,7 @@ public class InformationsFrame extends TemplateFrame {
 			modifyBtn.setVisible(true);
 			validateBtn.setVisible(false);
 			disableFields();
-			ManageMyBusiness mmb = (ManageMyBusiness) fc.createClass("ManageMyBusiness");
+			ManageMyBusiness mmb = new ManageMyBusiness();
 			mmb.update(legalNameField.getText(), addressField.getText(), zipCodeField.getText(),
 					townField.getText(), phoneNumberField.getText(), emailField.getText(), serenField.getText());
 		}

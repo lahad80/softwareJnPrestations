@@ -36,7 +36,6 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.jnPrestations.factories.FactoryClass;
 import com.jnPrestations.manages.ManageInvoice;
 import com.jnPrestations.manages.ManageMyBusiness;
 import com.jnPrestations.miscellaneous.MyTableModel;
@@ -79,7 +78,6 @@ public class InvoiceViewingFrame extends TemplateFrame {
 	private String period;
 	private String dateOfIssueToString;
 	private String dayOut;
-	private FactoryClass fc = new FactoryClass();
 
 	public InvoiceViewingFrame(MyBusiness myBusiness, EstateAgency estateAg, Property property){
 		frame    = this;
@@ -232,12 +230,12 @@ public class InvoiceViewingFrame extends TemplateFrame {
 			// TODO Auto-generated method stub
 			JOptionPane jop = new JOptionPane();
 			if (newInvoice){
-				ManageMyBusiness mmb =   (ManageMyBusiness) fc.createClass("ManageMyBusiness");
+				ManageMyBusiness mmb =   new ManageMyBusiness();
 				mmb.incrementBillNumber();;
 				newInvoice = false;
 				
 				// save the bill in database
-				ManageInvoice mi = (ManageInvoice) fc.createClass("ManageInvoice");
+				ManageInvoice mi = new ManageInvoice();
 				mi.register(myBusiness.getBillNumber(), dateOfIssueToString, period, "unsettled", property);
 				
 				// create the pdf document
@@ -261,8 +259,8 @@ public class InvoiceViewingFrame extends TemplateFrame {
 			
 			document.add(new Paragraph
 					(myBusiness.getLegalName() + "                                                                         " + "Client:  "+ estateAg.getLegalName() + "\n"+
-				"\n"+ myBusiness.getAddress()   + "                                               " + "Adresse:  "+ estateAg.getAddress() + "\n" +
-				 myBusiness.getZipCode() + "  "+ myBusiness.getTown() + "                                                                                        " + estateAg.getZipCode() + "   " + estateAg.getTown() + "\n" +
+				"\n"+ myBusiness.getAddress()   + "                                                   	 " + "Adresse:  "+ estateAg.getAddress() + "\n" +
+				 myBusiness.getZipCode() + "  "+ myBusiness.getTown() + "                                                                                      " + estateAg.getZipCode() + "   " + estateAg.getTown() + "\n" +
 				 "Tél: " + myBusiness.getPhoneNumber() + "\n" +
 				 "Email: " + myBusiness.getEmail() +"\n" +
 				 myBusiness.getSiren() + "                                                            " + "Date: " +  dayOut + "\n\n\n\n\n\n\n" + 

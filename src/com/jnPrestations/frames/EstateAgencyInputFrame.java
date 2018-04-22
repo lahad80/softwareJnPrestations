@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.jnPrestations.factories.FactoryClass;
 import com.jnPrestations.manages.ManageEstateAgency;
 
 public class EstateAgencyInputFrame extends TemplateFrame{
@@ -31,7 +30,6 @@ public class EstateAgencyInputFrame extends TemplateFrame{
 	private JButton validateButton = new JButton("Valider", new ImageIcon("images\\validateImg.png"));
 
 	private JFrame frame;
-	private FactoryClass fc = new FactoryClass();
 
 	public EstateAgencyInputFrame (){
 
@@ -120,7 +118,7 @@ public class EstateAgencyInputFrame extends TemplateFrame{
 				jop.showMessageDialog(frame, "Les champs dénomination et adresse sont obligatoires !", "Ajout d'un client ", JOptionPane.ERROR_MESSAGE);
 
 			}else{
-				ManageEstateAgency mc = (ManageEstateAgency) fc.createClass("ManageEstateAgency");
+				ManageEstateAgency mc = new ManageEstateAgency();
 				mc.add(legalNameField.getText(), addressField.getText(), zipCodeField.getText(),
 						townField.getText(), phoneNumberField.getText(), emailField.getText(), sirenField.getText());
 				JOptionPane jop = new JOptionPane();

@@ -6,25 +6,17 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
-import com.jnPrestations.connections.HibernateUtil;
-import com.jnPrestations.factories.FactoryClass;
 import com.jnPrestations.manages.ManageMyBusiness;
 
 public class LandingFrame extends TemplateFrame{
 	
 	private JTextArea ta = new JTextArea();
 	
-	private FactoryClass fc = new FactoryClass();
-	private ManageMyBusiness mmb = (ManageMyBusiness) fc.createClass("ManageMyBusiness");
+	private ManageMyBusiness mmb = new ManageMyBusiness();
 	
 	public  LandingFrame() {
 		

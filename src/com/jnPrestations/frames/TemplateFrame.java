@@ -15,15 +15,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.jnPrestations.factories.FactoryClass;
+import com.jnPrestations.enumerations.FrameModels;
+import com.jnPrestations.factories.FrameFactory;
 import com.jnPrestations.main.Main;
 
 
-public class TemplateFrame extends JFrame {
+public abstract class TemplateFrame extends JFrame {
 
 	protected Font police = new Font("Arial", Font.BOLD, 20);
 	protected JPanel pan = new JPanel();
-	protected FactoryClass fc = new FactoryClass();
 	protected JFrame frame;
 	
 
@@ -47,26 +47,26 @@ public class TemplateFrame extends JFrame {
 		
 		JMenu jnPrestations = new JMenu("Jn Prestations");
 		jnPrestations.setIcon(new ImageIcon("images\\jnpres.png"));
-		addMenuItem(jnPrestations, "Accueil", "LandingFrame");
-		addMenuItem(jnPrestations, "Informations", "InformationsFrame");
+		addMenuItem(jnPrestations, "Accueil", FrameModels.LandingFrame);
+		addMenuItem(jnPrestations, "Informations", FrameModels.InformationsFrame);
 		menuBar.add(jnPrestations);
 		
 		JMenu estateAgences = new JMenu("Syndics");
 		estateAgences.setIcon(new ImageIcon("images\\customer.png"));
-		addMenuItem(estateAgences, "Nouveau syndic", "EstateAgencyInputFrame");
-		addMenuItem(estateAgences, "Liste des syndics", "EstateAgenciesListFrame");
+		addMenuItem(estateAgences, "Nouveau syndic", FrameModels.EstateAgencyInputFrame);
+		addMenuItem(estateAgences, "Liste des syndics", FrameModels.EstateAgenciesListFrame);
 		menuBar.add(estateAgences);
 		
 		JMenu residencies = new JMenu("Résidences");
 		residencies.setIcon(new ImageIcon("images\\building.png"));
-		addMenuItem(residencies, "Nouvelle résidence", "PropertyInputFrame");
-		addMenuItem(residencies, "Liste des résidences", "PropertiesListFrame");
+		addMenuItem(residencies, "Nouvelle résidence", FrameModels.PropertyInputFrame);
+		addMenuItem(residencies, "Liste des résidences", FrameModels.PropertiesListFrame);
 		menuBar.add(residencies);
 
 		JMenu invoices = new JMenu("Factures");
 		invoices.setIcon(new ImageIcon("images\\calculator.png"));
-		addMenuItem(invoices, "Etablir une facture", "InvoiceInputFrame");
-		addMenuItem(invoices, "Factures impayées"  , "outstandingInvoicesFrame");
+		addMenuItem(invoices, "Etablir une facture", FrameModels.InvoiceInputFrame);
+		addMenuItem(invoices, "Factures impayées"  , FrameModels.outstandingInvoicesFrame);
 		menuBar.add(invoices);
 		
 		this.setJMenuBar(menuBar);
@@ -127,7 +127,7 @@ public class TemplateFrame extends JFrame {
 		}
 	}
 	
-	private void addMenuItem(JMenu nomMenu, String nomMenuItem, String frameToDisplay){
+	private void addMenuItem(JMenu nomMenu, String nomMenuItem, FrameModels frameToDisplay){
 		JMenuItem jmenuItem = new JMenuItem(nomMenuItem);
 		jmenuItem.setBackground(new Color(124, 67, 30));
 		jmenuItem.setForeground(Color.WHITE);
@@ -138,7 +138,7 @@ public class TemplateFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				Main.point = getLocation();
-				fc.createClass(frameToDisplay);
+				FrameFactory.buildFrame(frameToDisplay);
 				dispose();
 			}
 		});
@@ -147,6 +147,5 @@ public class TemplateFrame extends JFrame {
 		nomMenu.add(jmenuItem);
 		
 	}
-
 
 }

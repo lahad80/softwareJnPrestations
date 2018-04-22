@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 
 import org.hibernate.SessionFactory;
 
-import com.jnPrestations.factories.FactoryClass;
 import com.jnPrestations.manages.ManageEstateAgency;
 import com.jnPrestations.beans.EstateAgency;
 
@@ -30,7 +29,7 @@ public class EstateAgenciesListFrame extends TemplateFrame {
 	private List <EstateAgency> estateAgenciesArray = new ArrayList<EstateAgency>();
 	private int position = 0;
 	
-	private JLabel titleLabel = new JLabel("Liste des syndics");
+	private JLabel titleLabel = new JLabel("Liste des clients");
 
 	private JTextField legalNameField = new JTextField();
 	private JTextField addressField = new JTextField();
@@ -51,7 +50,6 @@ public class EstateAgenciesListFrame extends TemplateFrame {
 	
 	private JFrame frame;
 	private JOptionPane jop = new JOptionPane();
-	private FactoryClass fc = new FactoryClass();
 
 
 	public EstateAgenciesListFrame() {
@@ -229,7 +227,7 @@ public class EstateAgenciesListFrame extends TemplateFrame {
 		this.setContentPane(pan);
 		this.setVisible(true);
 		disableFields();
-		ManageEstateAgency mc = (ManageEstateAgency) fc.createClass("ManageEstateAgency");
+		ManageEstateAgency mc = new ManageEstateAgency();
 		estateAgenciesArray =  mc.listAll();
 		
 		if(estateAgenciesArray.size() > 0){
@@ -248,7 +246,7 @@ public class EstateAgenciesListFrame extends TemplateFrame {
 			int reponse = jop.showConfirmDialog(frame, "Voulez vous supprimer " + legalNameField.getText() + " ?",
 					"Suppression d'un client", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			if(reponse == JOptionPane.OK_OPTION){
-				ManageEstateAgency mc = (ManageEstateAgency) fc.createClass("ManageEstateAgency");
+				ManageEstateAgency mc = new ManageEstateAgency();
 				mc.delete(estateAgenciesArray.get(position).getId());
 				estateAgenciesArray.remove(position);
 				// after removal, if the list is not empty
@@ -276,7 +274,7 @@ public class EstateAgenciesListFrame extends TemplateFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
 			// updating the database
-			ManageEstateAgency mc = (ManageEstateAgency) fc.createClass("ManageEstateAgency");
+			ManageEstateAgency mc = new ManageEstateAgency();
 			mc.update(estateAgenciesArray.get(position).getId(), legalNameField.getText(), addressField.getText(), zipCodeField.getText(),
 					townField.getText(), phoneNumberField.getText(), emailField.getText(), sirenField.getText());
 

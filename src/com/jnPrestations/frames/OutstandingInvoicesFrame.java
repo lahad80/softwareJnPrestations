@@ -10,24 +10,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
 import com.jnPrestations.miscellaneous.Bouton_Renderer;
 import com.jnPrestations.miscellaneous.Delete_BoutonEditor;
 import com.jnPrestations.miscellaneous.MyTableModel;
 import com.jnPrestations.beans.Invoice;
-import com.jnPrestations.factories.FactoryClass;
 import com.jnPrestations.manages.ManageInvoice;
 
 
 
 
-public class outstandingInvoicesFrame extends TemplateFrame{
+public class OutstandingInvoicesFrame extends TemplateFrame{
 
 	
 	private JLabel titleLabel = new JLabel("Les factures impayées");
@@ -38,10 +30,9 @@ public class outstandingInvoicesFrame extends TemplateFrame{
 	private Object [][] data;
 	private JScrollPane scrollpane;
 	private Color color = new Color(229, 152, 102);
-	private FactoryClass fc = new FactoryClass();
-	private ManageInvoice mi = (ManageInvoice) fc.createClass("ManageInvoice");
+	private ManageInvoice mi = new ManageInvoice();
 
-	public outstandingInvoicesFrame(){
+	public OutstandingInvoicesFrame(){
 		//this.setTitle("Factures impayées");
 		pan.setLayout(null);
 		

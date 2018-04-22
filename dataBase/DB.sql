@@ -1,8 +1,9 @@
---  SOURCE C:/Users/lahad/Desktop/programme_java/jnPrestationsProject/brouillonJnPrestations/BDD.sql;
+--  SOURCE C:/Users/lahad/Desktop/programme_java/jnPrestationsProject/dataBase/DB.sql;
 
 -- CREATE DATABASE testJnPrestations;
 
 USE testJnPrestations;
+
 
 
 CREATE TABLE MyBusinesses (
@@ -16,7 +17,7 @@ CREATE TABLE MyBusinesses (
 	email VARCHAR (30) NOT NULL,
 	siren VARCHAR (30) NOT NULL,
 	
-	PRIMARY KEY (id)
+	CONSTRAINT pk_mybus PRIMARY KEY (id)
 )
 ENGINE = InnoDB;
 
@@ -31,7 +32,7 @@ CREATE TABLE EstateAgencies (
 	email VARCHAR (30),
 	siren VARCHAR (30),
 	
-	PRIMARY KEY (id)
+	CONSTRAINT pk_estateAg PRIMARY KEY (id)
 )
 ENGINE = InnoDB;
 
@@ -42,8 +43,8 @@ CREATE TABLE Properties (
 	service VARCHAR (255) NOT NULL,
 	basicFee DOUBLE DEFAULT NULL ,
 	estateAgency_id int NOT NULL ,
-	PRIMARY KEY (id),
-	FOREIGN KEY (estateAgency_id) REFERENCES EstateAgencies(id) ON DELETE CASCADE
+	CONSTRAINT pk_prop PRIMARY KEY (id),
+	CONSTRAINT fk_prop_estateAg FOREIGN KEY (estateAgency_id) REFERENCES EstateAgencies(id) ON DELETE CASCADE
 )
 ENGINE = InnoDB;
 
@@ -55,10 +56,7 @@ CREATE TABLE Invoices (
 	period VARCHAR (15) NOT NULL,
 	status VARCHAR (255),
 	property_id INT ,
-	PRIMARY KEY (id),
-	FOREIGN KEY (property_id) REFERENCES Properties (id) ON DELETE CASCADE
+	CONSTRAINT pk_inv PRIMARY KEY (id),
+	CONSTRAINT fk_inv_prop FOREIGN KEY (property_id) REFERENCES Properties (id) ON DELETE CASCADE
 )
 ENGINE = InnoDB;
-
-
-

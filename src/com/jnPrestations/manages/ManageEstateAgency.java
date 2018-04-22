@@ -11,12 +11,10 @@ import org.hibernate.Transaction;
 import com.jnPrestations.beans.EstateAgency;
 import com.jnPrestations.beans.Property;
 import com.jnPrestations.singletons.HibernateUtil;
-import com.jnPrestations.factories.FactoryClass;
 
 public class ManageEstateAgency {
 
-	private FactoryClass fc = new FactoryClass();
-	private EstateAgency estateAg = (EstateAgency)fc.createClass("EstateAgency");
+	private EstateAgency estateAg = new EstateAgency();
 
 	public ManageEstateAgency (){}
 

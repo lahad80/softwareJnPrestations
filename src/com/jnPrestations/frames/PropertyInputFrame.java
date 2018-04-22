@@ -21,7 +21,6 @@ import javax.swing.JTextField;
 
 import org.hibernate.SessionFactory;
 
-import com.jnPrestations.factories.FactoryClass;
 import com.jnPrestations.manages.ManageEstateAgency;
 import com.jnPrestations.manages.ManageProperty;
 import com.jnPrestations.beans.EstateAgency;
@@ -52,9 +51,8 @@ public class PropertyInputFrame extends TemplateFrame{
 
 	private List <EstateAgency> estaAgArray = new LinkedList<EstateAgency>();
 	
-	private FactoryClass fc = new FactoryClass();
-	private ManageEstateAgency mea = (ManageEstateAgency) fc.createClass("ManageEstateAgency");
-	private ManageProperty mp = (ManageProperty) fc.createClass("ManageProperty");
+	private ManageEstateAgency mea = new ManageEstateAgency();
+	private ManageProperty mp = new ManageProperty();
 
 	public PropertyInputFrame(){
 		frame = this;
@@ -94,7 +92,7 @@ public class PropertyInputFrame extends TemplateFrame{
 		this.setContentPane(pan);
 		this.setVisible(true);
 
-		ManageEstateAgency mea = (ManageEstateAgency) fc.createClass("ManageEstateAgency");
+		ManageEstateAgency mea = new ManageEstateAgency();
 		List<EstateAgency> estateAgList = mea.listAll();
 		Iterator<EstateAgency> it = estateAgList.iterator();		
 		while (it.hasNext()){
@@ -116,7 +114,7 @@ public class PropertyInputFrame extends TemplateFrame{
 					jop.showMessageDialog(frame, "Tous les champs sont obligatoires !", "Ajout d'une résidence ", JOptionPane.ERROR_MESSAGE);
 				}
 				else{
-						EstateAgency selectedEstateAg = (EstateAgency) fc.createClass("EstateAgency");
+						EstateAgency selectedEstateAg = new EstateAgency();
 						selectedEstateAg = mea.find(estaAgArray.get(customersComboBox.getSelectedIndex()).getId());
 
 						basicFee = ((Number) basicFeeField.getValue()).doubleValue();

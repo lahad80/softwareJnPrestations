@@ -22,7 +22,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import com.jnPrestations.factories.FactoryClass;
 import com.jnPrestations.manages.ManageProperty;
 import com.jnPrestations.miscellaneous.MyTableModel;
 import com.jnPrestations.beans.Property;
@@ -65,9 +64,8 @@ public class PropertiesListFrame extends TemplateFrame{
 	private JFrame frame;
 	private JOptionPane jop = new JOptionPane();
 
-	private FactoryClass fc = new FactoryClass();
-	private ManageProperty mp =  (ManageProperty) fc.createClass("ManageProperty");
-	private Property currentProperty = (Property) fc.createClass("Property");
+	private ManageProperty mp = new ManageProperty();
+	private Property currentProperty = new Property();
 
 	public PropertiesListFrame(){
 		frame = this;
@@ -169,7 +167,7 @@ public class PropertiesListFrame extends TemplateFrame{
 			// TODO Auto-generated method stub
 			basicFee = ((Number)basicFeeField.getValue()).doubleValue();
 			// update database
-			ManageProperty mp = (ManageProperty) fc.createClass("ManageProperty");
+			ManageProperty mp = new ManageProperty();
 			mp.update(addressField.getText(),serviceField.getText(), basicFee, Integer.parseInt(idField.getText()));
 
 			remove(scrollPane);

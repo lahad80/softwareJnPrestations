@@ -5,13 +5,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.jnPrestations.singletons.HibernateUtil;
-import com.jnPrestations.factories.FactoryClass;
 import com.jnPrestations.beans.MyBusiness;
 
 public class ManageMyBusiness {
 
-	private FactoryClass fc = new FactoryClass();
-	private MyBusiness mb = (MyBusiness) fc.createClass("MyBusiness");
+	private MyBusiness mb = new MyBusiness();
 
 
 	public void update( String legalName, String address, String zipCode, String town,

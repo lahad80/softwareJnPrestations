@@ -12,12 +12,10 @@ import org.hibernate.Transaction;
 import com.jnPrestations.beans.EstateAgency;
 import com.jnPrestations.beans.Property;
 import com.jnPrestations.singletons.HibernateUtil;
-import com.jnPrestations.factories.FactoryClass;
 
 public class ManageProperty {
 
-	private FactoryClass fc = new FactoryClass();
-	private Property property = (Property) fc.createClass("Property");
+	private Property property = new Property();
 	
 	public void add(String address,String service, double basicFee, EstateAgency estateAg){
 

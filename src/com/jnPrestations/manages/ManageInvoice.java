@@ -11,13 +11,11 @@ import org.hibernate.Transaction;
 import com.jnPrestations.beans.Invoice;
 import com.jnPrestations.beans.Property;
 import com.jnPrestations.singletons.HibernateUtil;
-import com.jnPrestations.factories.FactoryClass;
 
 
 public class ManageInvoice {
 	
-	private FactoryClass fc = new FactoryClass();
-	private Invoice invoice = (Invoice)fc.createClass("Invoice");
+	private Invoice invoice = new Invoice();
 
 	
 	public ManageInvoice(){
