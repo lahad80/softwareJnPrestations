@@ -24,10 +24,10 @@ public class LandingFrame extends TemplateFrame{
 		police = new Font("Arial", Font.BOLD, 14);
 		ta.setFont(police);
 		ta.setForeground(Color.BLUE);
-		String presentation  = "\n Logiciel de gestion pour JN PRESTATIONS,\n\n crée par Mr DIAW Abdou\n dans le cadre "+
-		"de son DUT Informatique.\n\n\n Technologies utilisées:\n\n \t- Java, XML\n \t- Mysql\n \t- Hibernate\n \t- Eclipse\n \t- Itext\n \t- Git";
+		String presentation  = "\n Logiciel de gestion pour JN PRESTATIONS,\n\n crée par Mr DIAW Lahad\n dans le cadre "+
+		"de son DUT Informatique.\n\n\n Technologies utilisées:\n\n \t- Java\n \t- Hibernate\n \t- Mysql\n \t- Junit\n \t- Itext\n \t- Eclipse\n \t- Git";
 		ta.setText(presentation);
-		ta.setBounds(230, 140, 330, 290);
+		ta.setBounds(230, 140, 330, 295);
 		ta.setEditable(false);
 			
 		TitledBorder title = BorderFactory.createTitledBorder("A propos");
