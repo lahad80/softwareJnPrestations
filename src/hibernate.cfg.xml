@@ -7,7 +7,7 @@
 		<!-- Assume jnPrestations is the database name -->
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/jnPrestations</property>
 		<property name="hibernate.connection.username">lahad</property>
-		<property name="hibernate.connection.password">*MboroNdiaye99</property>
+		<property name="hibernate.connection.password">***************</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>	
 		<property name="connection.pool_size">1</property>
 		<property name="hibernate.current_session_context_class">thread</property>
